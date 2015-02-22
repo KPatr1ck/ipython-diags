@@ -27,7 +27,7 @@ the diagram is created as SVG and then rendered to PNG using inkscape.
 Inkscape for windows can be downloaded from (http://inkscape.org/)
 
 
-TO INSTALL actdiag, blockdiag, nwdiag, seqdiag:
+FIRST YOU NEED TO INSTALL actdiag, blockdiag, nwdiag, seqdiag:
 http://blockdiag.com/en/index.html
 sudo pip install actdiag
 sudo pip install blockdiag
@@ -35,8 +35,8 @@ sudo pip install nwdiag
 sudo pip install seqdiag
 
 
-
-%install_ext https://bitbucket.org/vladf/ipython-diags/raw/default/diagmagic.py
+Then inside IPython:
+%install_ext https://raw.githubusercontent.com/ricardodeazambuja/ipython-diags/master/diagmagic.py
 %load_ext diagmagic
 
 """
@@ -212,7 +212,6 @@ class BlockdiagMagics(Magics):
         '''
         global _size    
         _size = (int(line[:line.find(',')]), int(line[line.find(',')+1:]))
-        print(_size)
 
 
     @line_cell_magic
