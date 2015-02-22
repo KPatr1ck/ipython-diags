@@ -114,10 +114,11 @@ class BlockdiagMagics(Magics):
         """Create sequence diagram using supplied diag methods."""
         code = cell + u'\n'
 
-        # if inkscape is available create SVG for either case
-        if self.inkscape_available():
-            global _draw_mode
-            _draw_mode = 'SVG'
+        if _publish_mode == 'PNG':
+            # if inkscape is available create SVG for either case
+            if self.inkscape_available():
+                global _draw_mode
+                _draw_mode = 'SVG'
 
         try:
 
