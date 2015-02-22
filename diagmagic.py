@@ -153,18 +153,34 @@ class BlockdiagMagics(Magics):
 
             file_name = diag_name + '.' + _publish_mode.lower()
             with io.open(file_name, 'rb') as f:
+                if _publish_mode == 'SVG':
+                    for i in range(2):
+                        data = f.readline() # Jumps over the first two lines
+                                            # making possible to embed the svg in
+                                            # a html code.
                 data = f.read()
                 f.close()
+
 
         finally:
             for file in os.listdir(tmpdir):
                 os.unlink(tmpdir + "/" + file)
             os.rmdir(tmpdir)
 
+    #     data = "<svg height=\"200\" width=\"200\">\
+    # <foreignObject width=\"200\" height=\"200\"\
+    #                requiredExtensions=\"http://www.w3.org/1999/xhtml\">\
+    #   <body xmlns=\"http://www.w3.org/1999/xhtml\">\
+    #     <div>BEFORE:$\\frac{a}{b}$:AFTER</div> \
+    #   </body>\
+    # </foreignObject>\
+    #     </svg>"
         if _publish_mode == 'SVG':
             publish_display_data(
-                u'IPython.core.displaypub.publish_svg',
-                {'image/svg+xml':data}
+                # u'IPython.core.displaypub.publish_svg',
+                # {'image/svg+xml':data}
+                u'IPython.core.displaypub.publish_html',
+                {'text/html':data}
             )
         else:
             publish_display_data(
